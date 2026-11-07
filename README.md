@@ -1,23 +1,11 @@
 # JobNest
 
-**Topic:** Job Board  
-**Programme:** Flutter Application Development, KHIT Guntur (IITM Pravartak and BodhBridge Flutter Lab)
-
 ## Description
 
 JobNest helps job seekers browse remote job openings, search and filter them,
 read the full details of a role, and fill in a validated application form.
-Applications are saved on the phone and can be reviewed later.
-
-<!-- TODO: replace with 2 or 3 sentences in your own words about who the app is for -->
-
-## Screenshots
-
-| Job list | Job detail | Application form | My applications |
-|---|---|---|---|
-| ![List](screenshots/list.png) | ![Detail](screenshots/detail.png) | ![Form](screenshots/form.png) | ![Applications](screenshots/applications.png) |
-
-<!-- TODO: take at least 3 screenshots from the phone, put them in a screenshots/ folder -->
+Applications and appearance preferences are saved on the device. Users can
+also create a local account to protect access to their application data.
 
 ## Data source
 
@@ -35,30 +23,23 @@ Applications are saved on the phone and can be reviewed later.
 
 ## Features
 
-- Job list with loading, error with retry, empty, and data states
-- Search by role or company, filter by job type and location
-- Pull down to refresh
-- Detail screen with description, salary, tags, date and original link
-- Salary range filter that keeps jobs with undisclosed salaries visible
-- Application form with validation on every field
-- My applications screen with editable applications and Applied, Interview,
-  Offer, and Rejected status chips
-- Application statistics grouped by status
-- Recently viewed jobs (last 10, saved on the device)
-- Settings screen with persistent system, light, and dark appearance options
-- Local profile creation and login, with password verifiers stored in Android
-  secure storage and app access gated by login
-- Light and dark theme generated from one seed colour
+- Browse remote jobs with search, job-type, location, and salary filters
+- View job descriptions, salary details, tags, and links to the original listing
+- Create and edit applications and track their status
+- View application statistics and recently viewed jobs
+- Create a local profile and sign in; password verifiers use secure storage
+- Choose system, light, or dark appearance in Settings
+- Refresh job listings from the Remotive API, with a one-hour local cache
 
 ## Project structure
 
 ```
 lib/
   main.dart
-  models/       Job, JobApplication
+  models/       Job, JobApplication, UserProfile
   services/     API, storage, local authentication, validators, date formatting
   providers/    JobProvider, ApplicationProvider, AuthProvider (ChangeNotifier)
-  screens/      login, list, detail, form, my applications, settings
+  screens/      login, job list/detail, applications, statistics, settings
   widgets/      job card, filter bar, loading / error / empty views, chip
   theme/        AppTheme (the only place a colour is defined)
 test/           widget tests and validator tests
@@ -66,27 +47,19 @@ test/           widget tests and validator tests
 
 ## How to run
 
-Requirements: Flutter 3.35 or newer (stable), JDK 17, Android Studio with the
-Flutter and Dart plugins.
+Requirements: Flutter 3.35 or newer (stable), JDK 17, and Android Studio with
+the Flutter and Dart plugins.
 
 ```bash
-git clone <YOUR-REPOSITORY-URL>
-cd job_board
+git clone https://github.com/pardhu1506/Job_board.git
+cd Job_board
 flutter pub get
-flutter run                      # emulator or connected phone
-flutter test                     # run the tests
-flutter build apk --release      # release APK
+flutter run
+flutter test
+flutter build apk --release
 ```
 
 The release APK is created at `build/app/outputs/flutter-apk/app-release.apk`.
-
-## Team
-
-| Member | Parts built |
-|---|---|
-| <!-- Name 1 --> | <!-- e.g. Data layer: Job model, JobApiService, StorageService, JobProvider --> |
-| <!-- Name 2 --> | <!-- e.g. List screen, filter bar, job card, loading / error / empty views --> |
-| <!-- Name 3 --> | <!-- e.g. Detail screen, application form, validators, My applications --> |
 
 ## Credits
 
