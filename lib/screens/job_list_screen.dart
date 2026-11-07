@@ -70,7 +70,7 @@ class _JobListScreenState extends State<JobListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('JobNest'),
+        title: const Text('Job Board'),
         actions: [
           IconButton(
             tooltip: 'Recently viewed jobs',

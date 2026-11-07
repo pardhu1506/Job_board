@@ -77,9 +77,9 @@ class MyApplicationsScreen extends StatelessWidget {
       case ApplicationStatus.applied:
         return Theme.of(context).colorScheme.primary;
       case ApplicationStatus.interview:
-        return Colors.deepPurple;
+        return Theme.of(context).colorScheme.secondary;
       case ApplicationStatus.offer:
-        return Colors.green;
+        return Theme.of(context).colorScheme.tertiary;
       case ApplicationStatus.rejected:
         return Theme.of(context).colorScheme.error;
     }

@@ -148,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           const ListTile(
             leading: Icon(Icons.work_outline),
-            title: Text('JobNest'),
+            title: Text('Job Board'),
             subtitle: Text('Browse remote jobs and manage your applications.'),
           ),
           const ListTile(

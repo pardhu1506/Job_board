@@ -1,11 +1,21 @@
-# JobNest
+# Job Board
+
+**Topic:** Job board
 
 ## Description
 
-JobNest helps job seekers browse remote job openings, search and filter them,
+Job Board helps job seekers browse remote job openings, search and filter them,
 read the full details of a role, and fill in a validated application form.
 Applications and appearance preferences are saved on the device. Users can
 also create a local account to protect access to their application data.
+
+## Screenshots
+
+These UI captures use a sample job listing.
+
+| Job list | Job details | Application form |
+|---|---|---|
+| ![Job list screen](screenshots/job_list.png) | ![Job details screen](screenshots/job_details.png) | ![Application form screen](screenshots/application_form.png) |
 
 ## Data source
 
@@ -25,11 +35,13 @@ also create a local account to protect access to their application data.
 
 - Browse remote jobs with search, job-type, location, and salary filters
 - View job descriptions, salary details, tags, and links to the original listing
-- Create and edit applications and track their status
+- Submit a validated application form and edit saved applications
+- Track applications as Applied, Interview, Offer, or Rejected
 - View application statistics and recently viewed jobs
 - Create a local profile and sign in; password verifiers use secure storage
 - Choose system, light, or dark appearance in Settings
 - Refresh job listings from the Remotive API, with a one-hour local cache
+- Loading, retryable error, empty, and populated job-list states
 
 ## Project structure
 
@@ -45,21 +57,48 @@ lib/
 test/           widget tests and validator tests
 ```
 
-## How to run
+## Requirements
 
-Requirements: Flutter 3.35 or newer (stable), JDK 17, and Android Studio with
-the Flutter and Dart plugins.
+- Flutter stable 3.35 or newer with Dart null safety
+- Android Studio with the Flutter and Dart plugins
+- JDK 17 and an Android emulator or physical Android phone
 
+## Run and test
+
+From a fresh clone:
 ```bash
 git clone https://github.com/pardhu1506/Job_board.git
 cd Job_board
 flutter pub get
-flutter run
-flutter test
-flutter build apk --release
+flutter run                         # Android emulator or connected phone
+flutter test                        # widget and unit tests
+flutter build apk --release         # build the release APK
 ```
 
-The release APK is created at `build/app/outputs/flutter-apk/app-release.apk`.
+The APK is created at `build/app/outputs/flutter-apk/app-release.apk`. Install
+it on an Android phone with:
+
+```bash
+adb install -r build/app/outputs/flutter-apk/app-release.apk
+```
+
+## Team
+
+The project specification requires two or three named members and each
+member's owned screen or major component. Team details have not been provided
+yet; complete this table before submission. The current repository history
+shows commits from the account `pardhu1506`; ensure every team member also
+contributes regular commits.
+
+| Member | Screen or major component owned |
+|---|---|
+| To be provided | To be provided |
+| To be provided | To be provided |
+
+## Defect log
+
+See [DEFECT_LOG.md](DEFECT_LOG.md) for automated results and physical-device
+checks that remain to be completed.
 
 ## Credits
 

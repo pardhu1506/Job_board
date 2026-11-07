@@ -50,7 +50,7 @@ void main() {
     await tester.tap(find.text('Create profile'));
     await tester.pumpAndSettle();
 
-    expect(find.text('JobNest'), findsOneWidget);
+    expect(find.text('Job Board'), findsOneWidget);
     await tester.tap(find.byTooltip('Settings'));
     await tester.pumpAndSettle();
     expect(find.text('Ravi Kumar'), findsOneWidget);

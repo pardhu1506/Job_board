@@ -7,6 +7,7 @@ import 'package:job_board/models/job.dart';
 import 'package:job_board/models/job_application.dart';
 import 'package:job_board/models/user_profile.dart';
 import 'package:job_board/services/auth_service.dart';
+import 'package:job_board/services/form_validators.dart';
 import 'package:job_board/services/job_api_exception.dart';
 import 'package:job_board/services/job_api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -148,6 +149,112 @@ void main() {
 
     expect(find.text('No jobs available right now'), findsOneWidget);
   });
+
+  testWidgets('limits long searches and shows the no-match state', (
+    tester,
+  ) async {
+    await _pumpJobBoard(
+      tester,
+      jobService: _FakeJobApiService(() async => [_sampleJob()]),
+    );
+
+    final search = find.byType(TextField).first;
+    await tester.enterText(search, 'x' * 100);
+    await tester.pumpAndSettle();
+
+    expect(tester.widget<TextField>(search).controller!.text.length, 60);
+    expect(find.text('No jobs match your search'), findsOneWidget);
+  });
+
+  testWidgets('repeated fast taps open only one job details screen', (
+    tester,
+  ) async {
+    await _pumpJobBoard(
+      tester,
+      jobService: _FakeJobApiService(() async => [_sampleJob()]),
+    );
+
+    final job = find.text('Flutter Developer').first;
+    await tester.tap(job);
+    for (var tap = 0; tap < 5; tap++) {
+      await tester.tap(job, warnIfMissed: false);
+    }
+    await tester.pumpAndSettle();
+
+    expect(find.text('Job details'), findsOneWidget);
+  });
+
+  testWidgets('rejects an empty application with a message for each field', (
+    tester,
+  ) async {
+    await _pumpJobBoard(
+      tester,
+      jobService: _FakeJobApiService(() async => [_sampleJob()]),
+    );
+
+    await tester.ensureVisible(find.text('Flutter Developer').first);
+    await tester.tap(find.text('Flutter Developer').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Apply now'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Submit application'));
+    await tester.tap(find.text('Submit application'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Please enter your full name'), findsOneWidget);
+    expect(find.text('Please enter your email address'), findsOneWidget);
+    expect(find.text('Please enter your mobile number'), findsOneWidget);
+    expect(find.text('Please select your experience level'), findsOneWidget);
+    expect(find.text('Please write a short cover letter'), findsOneWidget);
+  });
+
+  testWidgets(
+    'limits long application entries and remains usable in landscape',
+    (tester) async {
+      tester.view.physicalSize = const Size(900, 600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await _pumpJobBoard(
+        tester,
+        jobService: _FakeJobApiService(() async => [_sampleJob()]),
+      );
+
+      await tester.ensureVisible(find.text('Flutter Developer').first);
+      await tester.tap(find.text('Flutter Developer').first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Apply now'));
+      await tester.pumpAndSettle();
+
+      final fields = find.byType(TextFormField);
+      await tester.enterText(fields.at(0), 'A' * 100);
+      await tester.enterText(fields.at(1), 'a' * 100);
+      await tester.enterText(fields.at(2), '98765432109876543210');
+      await tester.enterText(fields.at(3), 'A' * 700);
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.widget<TextFormField>(fields.at(0)).controller!.text.length,
+        60,
+      );
+      expect(
+        tester.widget<TextFormField>(fields.at(1)).controller!.text.length,
+        80,
+      );
+      expect(
+        tester.widget<TextFormField>(fields.at(2)).controller!.text.length,
+        10,
+      );
+      expect(
+        tester.widget<TextFormField>(fields.at(3)).controller!.text.length,
+        FormValidators.coverLetterMax,
+      );
+
+      await tester.ensureVisible(find.text('Submit application'));
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('opens recently viewed and application statistics', (
     tester,

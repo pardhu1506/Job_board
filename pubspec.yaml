@@ -1,5 +1,5 @@
 name: job_board
-description: JobNest - a job board app built with Flutter and Provider.
+description: Job Board app built with Flutter and Provider.
 publish_to: 'none'
 version: 1.0.0+1
 

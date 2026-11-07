@@ -52,7 +52,7 @@ class JobBoardApp extends StatelessWidget {
       ],
       child: Consumer<ThemeSettingsProvider>(
         builder: (context, settings, _) => MaterialApp(
-          title: 'JobNest',
+          title: 'Job Board',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light(),
           darkTheme: AppTheme.dark(),

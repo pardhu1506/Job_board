@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'JobNest',
+                      'Job Board',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
@@ -234,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           _createMode
                               ? 'Already have a profile? Log in'
-                              : 'New to JobNest? Create profile',
+                              : 'New to Job Board? Create profile',
                         ),
                       ),
                     ],
