@@ -82,6 +82,10 @@ it on an Android phone with:
 adb install -r build/app/outputs/flutter-apk/app-release.apk
 ```
 
+To download the prebuilt Android app, download
+[JobBoard-Android.apk](downloads/JobBoard-Android.apk) to your phone and open
+it to install.
+
 ## Team
 
 The project specification requires two or three named members and each
