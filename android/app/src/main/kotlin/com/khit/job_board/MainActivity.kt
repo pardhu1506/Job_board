@@ -1,4 +1,4 @@
-package com.example.pardhu_flutter_project
+package com.khit.job_board
 
 import io.flutter.embedding.android.FlutterActivity
 
